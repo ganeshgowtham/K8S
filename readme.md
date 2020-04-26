@@ -12,7 +12,9 @@ By default K8S dashboard config doesn't create any dummy (or) default accounts. 
 **Create K8S admin account from following 3 commands**  
 1. `$ kubectl create serviceaccount dashboard -n default`
 2. `$ kubectl create clusterrolebinding dashboard-admin -n default  --clusterrole=cluster-admin  --serviceaccount=default:dashboard ` 
-3. Retrieve the admin token and use while login in K8S console `$ kubectl get secret $(kubectl get serviceaccount dashboard -o jsonpath="{.secrets[0].name}") -o jsonpath="{.data.token}" | base64 --decode`  
+3. `kubectl apply -f dashboard-adminuser.yml`
+4. `kubectl apply -f admin-role-binding.yml`
+5. Retrieve the admin token and use while login in K8S console `$ kubectl get secret $(kubectl get serviceaccount dashboard -o jsonpath="{.secrets[0].name}") -o jsonpath="{.data.token}" | base64 --decode`    
  Following screenshot shows K8S in local after admin login
  ![](/images/K8S-landingPage.JPG) 
   
